@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Notepad</title>
+  <style type="text/css">
+    body,html{
+        margin:0px;
+        height:100%;
+    }
+    
+    #txtEditor{
+        width:100%;
+        height:99.535%;
+        padding:0px;
+        margin:0px;
+        border:0px;
+        font-size: 18px;
+    }
+  </style>
+  </head>
+  <body>
+ <div id="header" style="width:100% ;display:inline-block;height:50px;background-color:#c22f30">
+   <table>
+    <tr>
+      <td><img src="#" alt="electron-网易云音乐"/></td>
+      <td><input onclick="left_click()" type="button"/><input  onclick="right_click()"  type="button" name="right-row"/></td>
+      <td><input type="text" value="热门歌曲"/></td>
+      <td><img src="#" alt="登录头像"/>
+        <select name='select-option'>
+          <option value="login">登录</option>
+          <option value="registe">注册</option>
+          <option value="hjw">胡佳文</option>          
+        </select>
+      </td>
+    </tr>
+  </table>
+ </div>
+ <div id="main-body" style="width:100% ;display:inline-block;height:100%">
+   <table  style="width:100% ;">
+     <tr>
+       <td style="border:1px solid #000;width:20%; border-right:10px solid #000">
+            <div>
+              <p >推荐</p> 
+              <p ><img src="#"/ >发现音乐</p> 
+              <p ><img src="#"/ >私人FM</p> 
+              <p ><img src="#"/ >视频</p> 
+              <p ><img src="#"/ >朋友</p> 
+            </div>
+            <div>
+              <p>我的音乐</p>
+              <p ><img src="#"/ >本地音乐</p> 
+              <p ><img src="#"/ >下载管理</p> 
+            </div>
+            <div>
+              <p>创建的歌单</p>
+              <p>我喜欢的音乐</p> 
+            </div>
+       </td>
+       <td style="border:1px solid #000;width:80%; border-left:10px solid #000"> 
+       </td>
+     </tr>
+   </table> 
+   <div class="displayMusic">
+     
+   </div>
+ </div>
+<hr>
+<button id="seconderwindow">测试新窗体</button>
+<p id="testp"></p>
+
+
+
+</body> 
+
+    <script type="text/javascript"> 
+      require('./createWindow')
+    </script>
+</html>
