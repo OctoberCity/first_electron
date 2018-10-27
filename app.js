@@ -1,15 +1,21 @@
-var {BrowserWindow,app} =require("electron");
+var {BrowserWindow,app,ipcMain,globalShortcut} =require("electron");
 
 let win;
 
 
 //监听app加载完毕才能创建窗口
-app.on("ready",createMainwindow);
+app.on("ready",main);
 app.on("window-all-closed",()=>{
 	  if (process.platform !== 'darwin') {
     app.quit();
   }
 });
+
+
+function main(){
+  createMainwindow();
+  globalEventRegister();
+}
 
 
 //创建主要窗口
@@ -28,6 +34,38 @@ win.on('close',()=>{
   win.webContents.openDevTools();
 win.loadURL(`file://${__dirname}/index.html`);
 win.show();
+}
 
+
+//监听ipc通信
+ipcMain.on("closeApp",()=>{
+  app.quit();
+});
+
+
+
+//注册全局时间
+function globalEventRegister(){
+  //注册关闭App
+  globalShortcut.register('Shift+X', () => {
+    app.quit();
+      console.log('CommandOrControl+X is pressed');
+    })
+
+
+  // 注册播放停止
+    globalShortcut.register('Space', () => {
+      console.log('music will be closed');
+    })
 
 }
+
+
+//接收全局鼠标点击
+ipMain.on('global-shortcut', function (arg) {
+
+var event = new MouseEvent('click');
+
+soundButtons[arg].dispatchEvent(event);
+
+});
