@@ -54,18 +54,18 @@ function globalEventRegister(){
 
 
   // 注册播放停止
-    globalShortcut.register('Space', () => {
+    globalShortcut.register('Spaces', () => {
       console.log('music will be closed');
     })
 
 }
 
 
-//接收全局鼠标点击
-ipMain.on('global-shortcut', function (arg) {
+// //接收全局鼠标点击
+// ipMain.on('global-shortcut', function (arg) {
 
-var event = new MouseEvent('click');
+// var event = new MouseEvent('click');
 
-soundButtons[arg].dispatchEvent(event);
+// soundButtons[arg].dispatchEvent(event);
 
-});
+// });

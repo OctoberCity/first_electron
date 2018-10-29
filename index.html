@@ -17,6 +17,13 @@
         border:0px;
         font-size: 18px;
     }
+    .musicfile{
+      margin-top:5px;
+      background-color: #f2f2f2;
+      text-align: center;
+      font-size: 20px;
+      font-style: bold;
+    }
   </style>
   </head>
   <body>
@@ -57,18 +64,26 @@
               <p>我喜欢的音乐</p> 
             </div>
        </td>
-       <td style="border:1px solid #000;width:80%; border-left:10px solid #000"> 
+       <td  id="list"  style="border:1px solid #000;width:80%; border-left:10px solid #000"> 
+
        </td>
      </tr>
    </table> 
    <div class="displayMusic">
-     
+     <audio controls="controls" id="htmlAudio" autoplay="autoplay">
+    <source   src="D:\CloudMusic\Terry Zhong - We Are One (feat. Karin Lv).mp3" type="audio/mpeg" />
+    Your browser does not support the audio element.
+   </audio>
    </div>
  </div>
 <hr>
 <button id="seconderwindow">测试打开新窗体</button>
 <p id="testp"></p>
 <button id="closeApp">ipc通信关闭app</button>
+<div id="holder">
+    将文件拖拽到此处
+
+</div>
 
 
 
@@ -76,6 +91,23 @@
 
     <script type="text/javascript"> 
       require('./createWindow')
-        require('./ipcConmunitcate')
+      require('./ipcConmunitcate')
+      require('./musiclist')
     </script>
+      <script>
+        const holder = document.getElementById("holder");
+        console.log(holder);
+    document.addEventListener('drop', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+  
+      for (let f of e.dataTransfer.files) {
+        holder.innerHTML="<p>"+f.path+"</p>"; 
+      }
+    });
+    document.addEventListener('dragover', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    });
+  </script>
 </html>
