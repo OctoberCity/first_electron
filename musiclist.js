@@ -1,28 +1,49 @@
+
+const {ipcRenderer} = require('electron');
 const fs= require("fs");
 const path= require("path");
 const fileArray = fs.readdirSync("D:/CloudMusic/"); 
 console.log(fileArray);
-const musiclist =document.getElementById("list");
+const musiclist =document.getElementById("trueMusicList");
 const html5Audio=document.getElementById("htmlAudio");
 //给每个文件添加点击事件
-function dispalymusic(filename){
-	console.log("点击事件");
+function dispalymusic(filename){ 
    htmlAudio.src="D:/CloudMusic/"+filename;
 }
+let list=musiclist.innerHTML;
 if(fileArray){
-	let list='';
-	fileArray.forEach((item,index)=>{
-	 list+="<p id ='musicfile' class='musicfile'>"+item+"</p>"
+	
+	fileArray.forEach((item,index)=>{ 
+	 list+="<tr class='musicfile'>"
+     +"<td>"+(index>=10?''+index:'0'+index)+"</td>"
+     +"<td>"+item+"</td>"
+     +"<td>歌手</td>"
+    +"<td>专辑</td>"
+     +"<td>时长</td>"
+     +"<td>大小</td>"
+    +"</tr>"
 	});
 	musiclist.innerHTML=list;
 	const musicfile=document.getElementsByClassName("musicfile");
 	//返回集合非数组不能使用forEach(),有序集合; 
      for(let i=0;i<musicfile.length;i++){
-	musicfile[i].addEventListener("click",(event)=>{ 
-		html5Audio.src=path.join("D:\CloudMusic",event.srcElement.innerHTML);
+	musicfile[i].addEventListener("click",(event)=>{  
+		html5Audio.src=path.join("D:\CloudMusic",fileArray[i]); 
 		htmlAudio.play(); 
 });
+	//监听右键
+	musicfile[i].addEventListener("mousedown",(event)=>{ 
+		 if(event.button===2){
+	    ipcRenderer.send("rightMouseClick","right");
+			} 
+	});
+ }
+
+ 
 }
-}
+
+ //右键监听事件
+
+
 
 
