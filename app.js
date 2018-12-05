@@ -1,13 +1,22 @@
 var {
     BrowserWindow,
     app,
-    ipcMain,
-    globalShortcut
+    ipcMain,  
 } = require("electron");
+const path =require("path");
+const loadnetdata=require(path.join(__dirname, 'mainProcess/loadnetdata.js'));
 
 let win;
 let settingsWindow;
+const global={};
+// 注册全局变量，下次打开需要重新加载
+global.somedata = {
+    num:0,//本地歌曲列表数量
+    musicLocalList:{},//本地歌曲列表
+    getMySongList:{"sdd":"sss"}, // 获取我的歌单列表，通过在线获得
 
+  }
+ 
 //监听app加载完毕才能创建窗口
 app.on("ready", main);
 app.on("window-all-closed", () => {
@@ -18,6 +27,9 @@ app.on("window-all-closed", () => {
 
 
 function main() {
+    require(path.join(__dirname, 'mainProcess/registerglobal.js'));
+    require(path.join(__dirname, 'mainProcess/musicmenu.js'));
+    loadnetdata.getMylocalList(global.musicLocalList);
     createMainwindow();
     globalEventRegister();
 }
@@ -68,39 +80,11 @@ ipcMain.on("rightMouseClick", (event, args) => {
 
     settingsWindow.loadURL(`file://${__dirname}/setting.html`);
 
-    settingsWindow.on('closed', function () {
+    settingsWindow.on('closed', () => {
         settingsWindow = null;
     });
     //窗口失去焦点，隐藏
-    settingsWindow.on('blur', function(){ 
+    settingsWindow.on('blur', () => {
         settingsWindow.close();
     });
 });
-
-
-//注册全局时间
-function globalEventRegister() {
-    //注册关闭App
-    globalShortcut.register('Shift+X', () => {
-        app.quit();
-        console.log('CommandOrControl+X is pressed');
-    })
-
-
-    // 注册播放停止
-    globalShortcut.register('Spaces', () => {
-        console.log('music will be closed');
-        gv
-    })
-
-}
-
-
-// //接收全局鼠标点击
-// ipMain.on('global-shortcut', function (arg) {
-
-// var event = new MouseEvent('click');
-
-// soundButtons[arg].dispatchEvent(event);
-
-// });

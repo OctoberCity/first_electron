@@ -1,9 +1,7 @@
 
-const {ipcRenderer} = require('electron');
+const {ipcRenderer,remote} = require('electron');
 const fs= require("fs");
-const path= require("path");
-const fileArray = fs.readdirSync("D:/CloudMusic/"); 
-console.log(fileArray);
+const path= require("path"); 
 const musiclist =document.getElementById("trueMusicList");
 const html5Audio=document.getElementById("htmlAudio");
 //给每个文件添加点击事件
@@ -11,8 +9,7 @@ function dispalymusic(filename){
    htmlAudio.src="D:/CloudMusic/"+filename;
 }
 let list=musiclist.innerHTML;
-if(fileArray){
-	
+if(fileArray){ 
 	fileArray.forEach((item,index)=>{ 
 	 list+="<tr class='musicfile'>"
      +"<td>"+(index>=10?''+index:'0'+index)+"</td>"
@@ -26,15 +23,15 @@ if(fileArray){
 	musiclist.innerHTML=list;
 	const musicfile=document.getElementsByClassName("musicfile");
 	//返回集合非数组不能使用forEach(),有序集合; 
-     for(let i=0;i<musicfile.length;i++){
+   for(let i=0;i<musicfile.length;i++){
 	musicfile[i].addEventListener("click",(event)=>{  
 		html5Audio.src=path.join("D:\CloudMusic",fileArray[i]); 
 		htmlAudio.play(); 
-});
+      });
 	//监听右键
 	musicfile[i].addEventListener("mousedown",(event)=>{ 
 		 if(event.button===2){
-	    ipcRenderer.send("rightMouseClick","right");
+	    ipcRenderer.send("show-music-menu","right");
 			} 
 	});
  }
