@@ -6,11 +6,13 @@
     <title>Notepad</title>
     <style type="text/css">
         body,
-        html,* {
+        html,
+        * {
             margin: 0px;
-            padding: 0px; 
+            padding: 0px;
         }
-        a{
+
+        a {
             text-decoration: none;
         }
 
@@ -41,17 +43,20 @@
             font-size: 15px;
 
         }
-        .music-th{
-            border-right:#a4a4a6 solid 1px; 
-        }
-        #list table{
-            font-size: 15px;
-            color:#5c5c5c;
-        }
-       #list td{
-           padding:5px 0px 5px 10px;
-       }
 
+        .music-th {
+            border-right: #a4a4a6 solid 1px;
+        }
+
+        #list table {
+            font-size: 15px;
+            color: #5c5c5c;
+        }
+
+        #list td {
+            padding: 5px 0px 5px 10px;
+        }
+     
     </style>
 </head>
 
@@ -111,7 +116,7 @@
                                     <td class="music-th" width="15%">专辑</td>
                                     <td class="music-th" width="10%">时长</td>
                                     <td class="music-th" width="10%">大小</td>
-                                </tr> 
+                                </tr>
                             </table>
                         </div>
                     </div>
@@ -129,8 +134,8 @@
 
 <script type="text/javascript">
     //require('./createWindow')
-    require('./ipcConmunitcate')
-    require('./musiclist')
+    require('./randerProcess/ipcConmunitcate')
+    require('./randerProcess/musiclist')
 </script>
 <script>
 

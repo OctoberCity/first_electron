@@ -8,16 +8,21 @@ const html5Audio=document.getElementById("htmlAudio");
 function dispalymusic(filename){ 
    htmlAudio.src="D:/CloudMusic/"+filename;
 }
+
+
 let list=musiclist.innerHTML;
+const fileArray =ipcRenderer.sendSync('getmusicLocalList'); 
 if(fileArray){ 
 	fileArray.forEach((item,index)=>{ 
-	 list+="<tr class='musicfile'>"
+        console.log(item);
+     const info=fs.statSync(path.join("D:/CloudMusic/",item.musicName));  
+	 list+="<tr class='musicfile '>"
      +"<td>"+(index>=10?''+index:'0'+index)+"</td>"
-     +"<td>"+item+"</td>"
-     +"<td>歌手</td>"
-    +"<td>专辑</td>"
+     +"<td>"+item.musicName+"</td>"
+     +"<td>"+item.tags.artist+"</td>"
+    +"<td>"+item.tags.album+"</td>"
      +"<td>时长</td>"
-     +"<td>大小</td>"
+     +"<td>"+(info.size/1024/1024).toFixed(2)+"MB</td>"
     +"</tr>"
 	});
 	musiclist.innerHTML=list;
@@ -25,7 +30,7 @@ if(fileArray){
 	//返回集合非数组不能使用forEach(),有序集合; 
    for(let i=0;i<musicfile.length;i++){
 	musicfile[i].addEventListener("click",(event)=>{  
-		html5Audio.src=path.join("D:\CloudMusic",fileArray[i]); 
+		html5Audio.src=path.join("D:\CloudMusic",fileArray[i].musicName); 
 		htmlAudio.play(); 
       });
 	//监听右键
@@ -39,8 +44,9 @@ if(fileArray){
  
 }
 
- //右键监听事件
 
-
-
+//获得我的歌单
+const dd=ipcRenderer.sendSync("myCreateMusicOrder","right");
+ 
+// 获取我收藏的歌单
 

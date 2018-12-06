@@ -1,4 +1,6 @@
-# first_electron
-第一个Electron应用
+#### electron 开发网易云Pc端
 
-#### 一个Electron的基本结构
+- 一步一步来
+- 基本功能实现
+- 服务器端使用node.js轻量框架
+- 播放模式自定义（网易重度患者，但是网易暂时不太满足我）
