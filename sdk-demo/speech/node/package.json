@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "baidu-aip-sdk": "^2.3.6"
+  }
+}
