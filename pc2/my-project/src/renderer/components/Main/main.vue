@@ -1,7 +1,7 @@
 <template>
     <div class="main">
         <musicTop></musicTop>
-        <el-main>中间</el-main>
+        <router-view></router-view> 
         <musicBottom></musicbottom>
     </div>
 </template>
