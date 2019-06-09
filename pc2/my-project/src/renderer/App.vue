@@ -11,6 +11,6 @@
 <style>
   /* CSS */ 
   .main_body{
-    height: 200px;            
+    /* height: 200px;         */
 }
 </style>

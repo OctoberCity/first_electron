@@ -4,12 +4,12 @@ let fs = require('fs');
 // 务必替换百度云控制台中新建百度语音应用的 Api Key 和 Secret Key
 let client = new AipSpeech(0, 'ZFHrSNwLlVgG9ERo57mVsHdI', 'qHlMHGGNFVQmBqukEb4oYNjz8ZNQ6d1R');
 
-let voice = fs.readFileSync('../assets/16k_test.pcm');
+let voice = fs.readFileSync('../assets/2test.wav');
 
 let voiceBase64 = new Buffer(voice);
 
 // 识别本地语音文件
-client.recognize(voiceBase64, 'pcm', 16000).then(function(result) {
+client.recognize(voiceBase64, 'wav', 8000).then(function(result) {
     console.log('语音识别本地音频文件结果: ' + JSON.stringify(result));
 }, function(err) {
     console.log(err);

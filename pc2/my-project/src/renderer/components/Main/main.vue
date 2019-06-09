@@ -5,9 +5,9 @@
         <musicBottom></musicbottom>
     </div>
 </template>
-<style scoped>
+<style >
     .main {
-        width: 100px;
+        width: 100%;
         height: 563px;
     }
 </style>

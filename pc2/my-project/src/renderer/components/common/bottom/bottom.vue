@@ -98,8 +98,9 @@
         bottom: 0px;
         left: 0px;
         width: 100%;
-        padding: 15px 20px 10px 20px;
+        padding: 15px 0px 10px 0px;
         display: inline-block;
+        background-color:#fff;  
     }
 
     .musicTime {
