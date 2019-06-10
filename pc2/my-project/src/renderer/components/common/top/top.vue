@@ -11,7 +11,7 @@
         <el-col :span="3">
           <routerHistory></routerHistory>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="4" class="search">
           <el-input placeholder="请输入歌名,歌手，电台" size="mini" suffix-icon="el-icon-search"></el-input>
         </el-col>
         <el-col :span="4" :offset="4">
@@ -40,11 +40,11 @@
           <i class="el-icon-minus"></i>
         </el-col>
         <el-col :span="1">
-          <i class="el-icon-close"></i>
+          <i class="el-icon-close" @click="closeWindow()"></i>
         </el-col>
       </el-row>
     </div>
-    <el-dialog title="提示" :visible.sync="dialogVisible" width="50%">
+    <el-dialog  :visible.sync="dialogVisible" width="350px">
      <Login @close="closeLogin()"></Login>         
     </el-dialog>
   </div>
@@ -71,6 +71,9 @@ export default {
   methods: {
     closeLogin(){
         this.dialogVisible = false;
+    },
+    closeWindow(){
+      this.$electron.ipcRenderer.send("closeApp");
     }
   }
 };
@@ -95,7 +98,7 @@ export default {
   font-weight: bold;
 }
 
-#top .el-input__inner {
+#top  .search .el-input__inner {
   background-color: #f82828;
   font-size: 12px;
   width: 200px;

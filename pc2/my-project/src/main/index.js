@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow ,ipcMain} from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -13,7 +13,7 @@ const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
-function createWindow () {
+function createWindow() {
   /**
    * Initial window options
    */
@@ -40,6 +40,11 @@ app.on('window-all-closed', () => {
     app.quit()
   }
 })
+//监听关闭事件
+ipcMain.on("closeApp", () => {
+  app.quit();
+});
+
 // 
 app.on('activate', () => {
   if (mainWindow === null) {
@@ -47,4 +52,3 @@ app.on('activate', () => {
   }
 })
 
- 
