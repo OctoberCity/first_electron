@@ -1,4 +1,8 @@
-import { app, BrowserWindow ,ipcMain} from 'electron'
+import { app, BrowserWindow ,Tray,Menu} from 'electron'
+const glob = require('glob');
+const path = require('path');
+
+
 
 /**
  * Set `__static` path to static files in production
@@ -8,10 +12,34 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
-let mainWindow
+let mainWindow;
+let tray =null;
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
+
+
+loadOthers();
+// 监听应用准备事件
+app.on('ready', createWindow)
+
+// 监听最后一个窗口关闭，应用退出事件
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
+
+
+app.on('activate', () => {
+  if (mainWindow === null) {
+    createWindow()
+  }
+})
+function loadOthers () {
+  const files = glob.sync(path.join(__dirname, 'main/**/*.js'))
+  files.forEach((file) => { require(file) })
+}
 
 function createWindow() {
   /**
@@ -30,25 +58,22 @@ function createWindow() {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+  mainWindow.setThumbarButtons([
+    {
+      tooltip: 'button1',
+      icon: path.join(__dirname, 'phone.png'),
+      click () { console.log('button1 clicked') }
+    }, {
+      tooltip: 'button2',
+      icon: path.join(__dirname, 'phone.png'), 
+      click () { console.log('button2 clicked.') }
+    }
+  ])
+ tray = new Tray(path.join(__dirname, 'phone.png'))
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Item1', type: 'radio' }, 
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu);
 }
-// 监听应用准备事件
-app.on('ready', createWindow)
-
-// 监听最后一个窗口关闭，应用退出事件
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
-//监听关闭事件
-ipcMain.on("closeApp", () => {
-  app.quit();
-});
-
-// 
-app.on('activate', () => {
-  if (mainWindow === null) {
-    createWindow()
-  }
-})
 

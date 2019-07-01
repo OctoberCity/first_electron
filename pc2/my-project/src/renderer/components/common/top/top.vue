@@ -37,7 +37,7 @@
           <i class="el-icon-bottom-left"></i>
         </el-col>
         <el-col :span="1">
-          <i class="el-icon-minus"></i>
+          <i class="el-icon-minus" @click="narrowWindow()"></i>
         </el-col>
         <el-col :span="1">
           <i class="el-icon-close" @click="closeWindow()"></i>
@@ -72,8 +72,13 @@ export default {
     closeLogin(){
         this.dialogVisible = false;
     },
-    closeWindow(){
+    // 关闭窗口
+    closeWindow(){ 
       this.$electron.ipcRenderer.send("closeApp");
+    },
+    // 缩小窗口
+    narrowWindow(){
+       this.$electron.ipcRenderer.send("narrowWindow");
     }
   }
 };
