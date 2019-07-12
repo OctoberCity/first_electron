@@ -21,7 +21,7 @@
         <img :src="item.album.blurPicUrl" />
         <span>{{item.name}}</span>
         <span>{{item.album.artists[0].name}}</span>
-        <!-- <span>{{item.album.name}}</span> -->
+        <span>{{item.album.name}}</span>
         <!-- <span>{{item.album.artists[0].name}}</span> -->
       </div>
     </div>
