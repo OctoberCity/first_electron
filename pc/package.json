@@ -4,7 +4,7 @@
   "description": "第一个Electron应用",
   "main": "app.js",
   "dependencies": {
-    "electron": "^3.0.6",
+    "electron": "^9.1.0",
     "jsmediatags": "^3.8.1"
   },
   "devDependencies": {},
